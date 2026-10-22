@@ -1,1 +1,88 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nusantara Hosting</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #f4f6ff;
+    }
+    header {
+      padding: 24px;
+      background: #111a2e;
+      border-bottom: 1px solid #29344b;
+    }
+    header h1 { margin: 0; font-size: 24px; }
+    header p { color: #9caac2; }
+    main { max-width: 1000px; margin: auto; padding: 24px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #141e33;
+      padding: 20px;
+      border: 1px solid #29344b;
+      border-radius: 14px;
+    }
+    .muted { color: #9caac2; }
+    button {
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #4778ff;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .status { color: #f6c76b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NUSANTARA HOSTING</h1>
+    <p>Game Server Control Panel</p>
+  </header>
+
+  <main>
+    <h2>Dashboard</h2>
+    <p class="muted">Kelola server game kamu dari satu tempat.</p>
+
+    <div class="grid">
+      <section class="card">
+        <h3>SA-MP Roleplay</h3>
+        <p class="status" id="status">Belum terhubung</p>
+        <p class="muted">Status server sungguhan belum tersedia.</p>
+        <button id="infoButton">Informasi</button>
+      </section>
+
+      <section class="card">
+        <h3>Server Saya</h3>
+        <p>0 server terdaftar</p>
+        <p class="muted">Fitur pembuatan server akan dikembangkan.</p>
+      </section>
+
+      <section class="card">
+        <h3>Penggunaan Resource</h3>
+        <p>CPU: --</p>
+        <p>RAM: --</p>
+        <p class="muted">Menunggu koneksi backend.</p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("infoButton").addEventListener("click", () => {
+      alert("Panel berhasil dibuka. Server game belum terhubung.");
+    });
+  </script>
+</body>
+</html>
+
