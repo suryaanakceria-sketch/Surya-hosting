@@ -2,87 +2,157 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nusantara Hosting</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1020;
-      color: #f4f6ff;
-    }
-    header {
-      padding: 24px;
-      background: #111a2e;
-      border-bottom: 1px solid #29344b;
-    }
-    header h1 { margin: 0; font-size: 24px; }
-    header p { color: #9caac2; }
-    main { max-width: 1000px; margin: auto; padding: 24px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-    .card {
-      background: #141e33;
-      padding: 20px;
-      border: 1px solid #29344b;
-      border-radius: 14px;
-    }
-    .muted { color: #9caac2; }
-    button {
-      padding: 11px 16px;
-      border: 0;
-      border-radius: 8px;
-      background: #4778ff;
-      color: white;
-      cursor: pointer;
-    }
-    button:disabled { opacity: .5; cursor: not-allowed; }
-    .status { color: #f6c76b; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nusantara Hosting Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1120;color:#e5eaf5;font-family:Arial,sans-serif}
+.layout{display:flex;min-height:100vh}
+aside{width:230px;background:#10192b;padding:24px 16px;border-right:1px solid #26334a}
+.logo{font-size:19px;font-weight:bold;margin-bottom:32px;color:#72a0ff}
+nav button{display:block;width:100%;text-align:left;padding:13px;margin:5px 0;background:transparent;color:#aab8d0;border:0;border-radius:8px;cursor:pointer}
+nav button:hover,nav button.active{background:#233454;color:white}
+main{flex:1;min-width:0;padding:28px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.muted{color:#91a0b9}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:24px 0}
+.card{background:#141e31;border:1px solid #293750;border-radius:12px;padding:20px}
+.card h3{margin-top:0}
+.big{font-size:25px;font-weight:bold}
+button.primary{background:#4278f5;color:white;border:0;border-radius:7px;padding:11px 15px;cursor:pointer}
+button.secondary{background:#263650;color:white;border:0;border-radius:7px;padding:11px 15px;cursor:pointer}
+input{background:#0b1120;color:white;border:1px solid #34435e;padding:12px;border-radius:7px;width:100%;margin:8px 0}
+pre{background:#080d17;border-radius:8px;padding:16px;white-space:pre-wrap;min-height:110px;color:#a9edc0}
+.page{display:none}
+.page.active{display:block}
+@media(max-width:650px){
+ .layout{display:block}
+ aside{width:100%;padding:16px}
+ .logo{margin-bottom:12px}
+ nav{display:flex;gap:5px;overflow-x:auto}
+ nav button{white-space:nowrap;width:auto}
+ main{padding:18px}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>SURYA HOSTING</h1>
-    <p>Game Server Control Panel</p>
-  </header>
+<div class="layout">
+<aside>
+  <div class="logo">NUSANTARA HOST</div>
+  <nav>
+    <button class="active" data-page="dashboard">Dashboard</button>
+    <button data-page="servers">My Servers</button>
+    <button data-page="console">Console</button>
+    <button data-page="files">File Manager</button>
+    <button data-page="settings">Settings</button>
+  </nav>
+</aside>
 
-  <main>
-    <h2>Dashboard</h2>
-    <p class="muted">Kelola server game kamu dari satu tempat.</p>
+<main>
+<div class="top">
+  <div>
+    <h1 id="heading">Dashboard</h1>
+    <p class="muted">Game Server Management Panel</p>
+  </div>
+  <span class="muted">Demo Panel</span>
+</div>
 
-    <div class="grid">
-      <section class="card">
-        <h3>SA-MP Roleplay</h3>
-        <p class="status" id="status">Belum terhubung</p>
-        <p class="muted">Status server sungguhan belum tersedia.</p>
-        <button id="infoButton">Informasi</button>
-      </section>
+<section id="dashboard" class="page active">
+  <div class="grid">
+    <div class="card"><p class="muted">Total Server</p><div class="big">1</div></div>
+    <div class="card"><p class="muted">Server Online</p><div class="big">0</div></div>
+    <div class="card"><p class="muted">Pemain Online</p><div class="big">0</div></div>
+  </div>
+  <div class="card">
+    <h3>Selamat datang!</h3>
+    <p class="muted">Kelola server game melalui menu di sebelah kiri.</p>
+    <p>Status: <strong>Belum terhubung ke server game</strong></p>
+  </div>
+</section>
 
-      <section class="card">
-        <h3>Server Saya</h3>
-        <p>0 server terdaftar</p>
-        <p class="muted">Fitur pembuatan server akan dikembangkan.</p>
-      </section>
+<section id="servers" class="page">
+  <div class="card">
+    <h2>My Servers</h2>
+    <p><strong>SA-MP Roleplay Indonesia</strong></p>
+    <p class="muted">Server ID: demo-samp-001</p>
+    <p>Status: <span>Belum terhubung</span></p>
+    <button class="primary" onclick="demo('Start')">Start</button>
+    <button class="secondary" onclick="demo('Restart')">Restart</button>
+    <button class="secondary" onclick="demo('Stop')">Stop</button>
+    <p id="server-message" class="muted">Mode demonstrasi.</p>
+  </div>
+</section>
 
-      <section class="card">
-        <h3>Penggunaan Resource</h3>
-        <p>CPU: --</p>
-        <p>RAM: --</p>
-        <p class="muted">Menunggu koneksi backend.</p>
-      </section>
-    </div>
-  </main>
+<section id="console" class="page">
+  <div class="card">
+    <h2>Server Console</h2>
+    <p class="muted">Console simulasi, bukan terminal Linux sungguhan.</p>
+    <pre id="console-output">Nusantara Hosting Demo
+Belum ada koneksi backend.</pre>
+    <input id="command" placeholder="Contoh: help" maxlength="100">
+    <button class="primary" onclick="sendCommand()">Kirim perintah demo</button>
+  </div>
+</section>
 
-  <script>
-    document.getElementById("infoButton").addEventListener("click", () => {
-      alert("Panel berhasil dibuka. Server game belum terhubung.");
-    });
-  </script>
+<section id="files" class="page">
+  <div class="card">
+    <h2>File Manager</h2>
+    <p class="muted">Area ini belum terhubung ke penyimpanan server.</p>
+    <p>Folder yang direncanakan: gamemodes, filterscripts, plugins, scriptfiles.</p>
+    <p>Unggah dan ekstrak GM ZIP memerlukan backend yang aman.</p>
+  </div>
+</section>
+
+<section id="settings" class="page">
+  <div class="card">
+    <h2>Settings</h2>
+    <p>Nama panel</p>
+    <input value="Nusantara Hosting" id="panel-name">
+    <button class="primary" onclick="saveName()">Ubah nama tampilan</button>
+    <p id="settings-message" class="muted"></p>
+  </div>
+</section>
+</main>
+</div>
+
+<script>
+const navButtons = document.querySelectorAll("nav button");
+const pages = document.querySelectorAll(".page");
+
+navButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    navButtons.forEach(item => item.classList.remove("active"));
+    pages.forEach(page => page.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById(button.dataset.page).classList.add("active");
+    document.getElementById("heading").textContent = button.textContent;
+  });
+});
+
+function demo(action) {
+  document.getElementById("server-message").textContent =
+    action + " dipilih. Ini simulasi; server belum dikendalikan.";
+  document.getElementById("console-output").textContent +=
+    "\n[DEMO] Tombol " + action + " ditekan.";
+}
+
+function sendCommand() {
+  const input = document.getElementById("command");
+  const output = document.getElementById("console-output");
+  const command = input.value.trim();
+  if (!command) return;
+  output.textContent += "\n> " + command + "\n[DEMO] Backend belum terhubung.";
+  input.value = "";
+}
+
+function saveName() {
+  const name = document.getElementById("panel-name").value.trim();
+  if (!name) return;
+  document.querySelector(".logo").textContent = name;
+  document.getElementById("settings-message").textContent =
+    "Nama tampilan diubah sementara.";
+}
+</script>
 </body>
 </html>
-
