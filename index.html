@@ -1,158 +1,274 @@
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nusantara Hosting Panel</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#0b1120;color:#e5eaf5;font-family:Arial,sans-serif}
-.layout{display:flex;min-height:100vh}
-aside{width:230px;background:#10192b;padding:24px 16px;border-right:1px solid #26334a}
-.logo{font-size:19px;font-weight:bold;margin-bottom:32px;color:#72a0ff}
-nav button{display:block;width:100%;text-align:left;padding:13px;margin:5px 0;background:transparent;color:#aab8d0;border:0;border-radius:8px;cursor:pointer}
-nav button:hover,nav button.active{background:#233454;color:white}
-main{flex:1;min-width:0;padding:28px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.muted{color:#91a0b9}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:24px 0}
-.card{background:#141e31;border:1px solid #293750;border-radius:12px;padding:20px}
-.card h3{margin-top:0}
-.big{font-size:25px;font-weight:bold}
-button.primary{background:#4278f5;color:white;border:0;border-radius:7px;padding:11px 15px;cursor:pointer}
-button.secondary{background:#263650;color:white;border:0;border-radius:7px;padding:11px 15px;cursor:pointer}
-input{background:#0b1120;color:white;border:1px solid #34435e;padding:12px;border-radius:7px;width:100%;margin:8px 0}
-pre{background:#080d17;border-radius:8px;padding:16px;white-space:pre-wrap;min-height:110px;color:#a9edc0}
-.page{display:none}
-.page.active{display:block}
-@media(max-width:650px){
- .layout{display:block}
- aside{width:100%;padding:16px}
- .logo{margin-bottom:12px}
- nav{display:flex;gap:5px;overflow-x:auto}
- nav button{white-space:nowrap;width:auto}
- main{padding:18px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="Nusantara Hosting Panel - Dashboard pengelolaan game server multi-game.">
+  <title>Nusantara Panel | Game Hosting</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/app.js" defer></script>
 </head>
 <body>
-<div class="layout">
-<aside>
-  <div class="logo">NUSANTARA HOST</div>
-  <nav>
-    <button class="active" data-page="dashboard">Dashboard</button>
-    <button data-page="servers">My Servers</button>
-    <button data-page="console">Console</button>
-    <button data-page="files">File Manager</button>
-    <button data-page="settings">Settings</button>
-  </nav>
-</aside>
+  <div class="app-shell">
 
-<main>
-<div class="top">
-  <div>
-    <h1 id="heading">Dashboard</h1>
-    <p class="muted">Game Server Management Panel</p>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="Nusantara Panel">
+        <span class="brand-mark">N</span>
+        <span class="brand-copy">
+          <strong>NUSANTARA</strong>
+          <small>HOSTING PANEL</small>
+        </span>
+      </a>
+
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="navigation" aria-label="Navigasi utama">
+        <a class="nav-link active" href="#dashboard" data-page="dashboard">
+          <span class="nav-icon">▦</span> Dashboard
+        </a>
+        <a class="nav-link" href="#servers" data-page="servers">
+          <span class="nav-icon">▤</span> Game Servers
+          <span class="nav-count">0</span>
+        </a>
+        <a class="nav-link" href="#templates" data-page="templates">
+          <span class="nav-icon">◈</span> Game Templates
+        </a>
+      </nav>
+
+      <div class="nav-label">MANAGEMENT</div>
+      <nav class="navigation" aria-label="Menu pengelolaan">
+        <a class="nav-link" href="#activity" data-page="activity">
+          <span class="nav-icon">◷</span> Activity Logs
+        </a>
+        <a class="nav-link" href="#settings" data-page="settings">
+          <span class="nav-icon">⚙</span> Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="plan-card">
+          <span class="plan-icon">✦</span>
+          <strong>Free Workspace</strong>
+          <p>Mode demonstrasi aktif. Server sungguhan belum terhubung.</p>
+          <span class="plan-badge">FRONTEND DEMO</span>
+        </div>
+        <div class="user-profile">
+          <div class="avatar">GU</div>
+          <div class="user-info">
+            <strong>Guest User</strong>
+            <small>Belum login</small>
+          </div>
+          <span class="muted">⋯</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuToggle"
+          aria-label="Buka navigasi" aria-expanded="false">☰</button>
+
+        <div class="breadcrumb">
+          <span>Workspace</span>
+          <span class="breadcrumb-separator">/</span>
+          <strong id="breadcrumbTitle">Dashboard</strong>
+        </div>
+
+        <div class="topbar-right">
+          <span class="connection-indicator">
+            <span class="status-dot"></span> UI Online
+          </span>
+          <button class="icon-button" id="helpButton" aria-label="Bantuan">?</button>
+          <div class="avatar top-avatar">GU</div>
+        </div>
+      </header>
+
+      <main class="content" id="mainContent">
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow">CONTROL CENTER</div>
+            <h1>Dashboard</h1>
+            <p class="subtitle">
+              Kelola workspace game hosting dari satu tempat.
+            </p>
+          </div>
+          <button class="button button-primary" id="createServerButton">
+            <span>＋</span> Create Server
+          </button>
+        </section>
+
+        <div class="demo-notice" role="status">
+          <span class="notice-icon">i</span>
+          <p>
+            <strong>Mode demonstrasi.</strong>
+            Angka dan server contoh bukan data hosting sungguhan.
+            Tombol pengelolaan server belum terhubung ke backend.
+          </p>
+        </div>
+
+        <section class="stats-grid" aria-label="Ringkasan dashboard">
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Total Servers</span><span class="stat-icon">▤</span>
+            </div>
+            <div class="stat-value" id="totalServers">0</div>
+            <div class="stat-foot">Server pada sesi demo</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Running</span><span class="stat-icon green">●</span>
+            </div>
+            <div class="stat-value" id="runningServers">0</div>
+            <div class="stat-foot">Belum ada mesin terhubung</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Stopped</span><span class="stat-icon amber">Ⅱ</span>
+            </div>
+            <div class="stat-value" id="stoppedServers">0</div>
+            <div class="stat-foot">Server demo yang berhenti</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Game Types</span><span class="stat-icon purple">◈</span>
+            </div>
+            <div class="stat-value">6</div>
+            <div class="stat-foot">Pilihan kategori awal</div>
+          </article>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <h2>Your Game Servers</h2>
+              <p>Daftar server pada workspace ini.</p>
+            </div>
+            <a href="#servers" class="text-link" data-page="servers">
+              View all <span>→</span>
+            </a>
+          </div>
+
+          <div class="server-toolbar">
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="serverSearch" type="search"
+                placeholder="Cari nama server atau game..."
+                aria-label="Cari server">
+            </label>
+            <select id="statusFilter" aria-label="Filter status">
+              <option value="all">Semua status</option>
+              <option value="running">Running</option>
+              <option value="stopped">Stopped</option>
+            </select>
+          </div>
+
+          <div class="server-list" id="serverList"></div>
+        </section>
+
+        <section class="section-block templates-section">
+          <div class="section-heading">
+            <div>
+              <h2>Supported Game Categories</h2>
+              <p>Kategori awal untuk pengembangan multi-game.</p>
+            </div>
+            <a href="#templates" class="text-link" data-page="templates">
+              All templates <span>→</span>
+            </a>
+          </div>
+
+          <div class="template-grid" id="templateGrid">
+            <button class="template-card" data-game="samp">
+              <span class="game-symbol samp">SA</span>
+              <span class="template-copy">
+                <strong>SA-MP / open.mp</strong>
+                <small>Roleplay &amp; multiplayer</small>
+              </span>
+              <span class="template-arrow">↗</span>
+            </button>
+            <button class="template-card" data-game="minecraft">
+              <span class="game-symbol minecraft">MC</span>
+              <span class="template-copy">
+                <strong>Minecraft</strong>
+                <small>Survival &amp; creative</small>
+              </span>
+              <span class="template-arrow">↗</span>
+            </button>
+            <button class="template-card" data-game="cs">
+              <span class="game-symbol cs">CS</span>
+              <span class="template-copy">
+                <strong>Counter-Strike</strong>
+                <small>Dedicated server</small>
+              </span>
+              <span class="template-arrow">↗</span>
+            </button>
+            <button class="template-card" data-game="other">
+              <span class="game-symbol other">＋</span>
+              <span class="template-copy">
+                <strong>More Games</strong>
+                <small>Future integrations</small>
+              </span>
+              <span class="template-arrow">↗</span>
+            </button>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>© <span id="currentYear"></span> Nusantara Hosting Panel</span>
+          <span>Foundation v1.0 · Demo interface</span>
+        </footer>
+      </main>
+    </div>
   </div>
-  <span class="muted">Demo Panel</span>
-</div>
 
-<section id="dashboard" class="page active">
-  <div class="grid">
-    <div class="card"><p class="muted">Total Server</p><div class="big">1</div></div>
-    <div class="card"><p class="muted">Server Online</p><div class="big">0</div></div>
-    <div class="card"><p class="muted">Pemain Online</p><div class="big">0</div></div>
+  <div class="modal-backdrop" id="serverModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true"
+      aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div>
+          <div class="eyebrow">WORKSPACE</div>
+          <h2 id="modalTitle">Create Demo Server</h2>
+        </div>
+        <button class="icon-button" id="closeModal"
+          aria-label="Tutup dialog">✕</button>
+      </div>
+
+      <p class="modal-description">
+        Form ini hanya membuat data contoh di browser. Belum membuat
+        server game sungguhan.
+      </p>
+
+      <form id="serverForm">
+        <label class="form-field">
+          <span>Server name</span>
+          <input id="serverName" name="serverName" type="text"
+            placeholder="Contoh: Nusantara Roleplay"
+            minlength="3" maxlength="32" required>
+        </label>
+
+        <label class="form-field">
+          <span>Game template</span>
+          <select id="gameType" name="gameType" required>
+            <option value="samp">SA-MP / open.mp</option>
+            <option value="minecraft">Minecraft</option>
+            <option value="cs">Counter-Strike</option>
+            <option value="other">Other / Future Game</option>
+          </select>
+        </label>
+
+        <div class="modal-actions">
+          <button class="button button-secondary" type="button"
+            id="cancelModal">Cancel</button>
+          <button class="button button-primary" type="submit">
+            Create Demo
+          </button>
+        </div>
+      </form>
+    </section>
   </div>
-  <div class="card">
-    <h3>Selamat datang!</h3>
-    <p class="muted">Kelola server game melalui menu di sebelah kiri.</p>
-    <p>Status: <strong>Belum terhubung ke server game</strong></p>
-  </div>
-</section>
 
-<section id="servers" class="page">
-  <div class="card">
-    <h2>My Servers</h2>
-    <p><strong>SA-MP Roleplay Indonesia</strong></p>
-    <p class="muted">Server ID: demo-samp-001</p>
-    <p>Status: <span>Belum terhubung</span></p>
-    <button class="primary" onclick="demo('Start')">Start</button>
-    <button class="secondary" onclick="demo('Restart')">Restart</button>
-    <button class="secondary" onclick="demo('Stop')">Stop</button>
-    <p id="server-message" class="muted">Mode demonstrasi.</p>
-  </div>
-</section>
-
-<section id="console" class="page">
-  <div class="card">
-    <h2>Server Console</h2>
-    <p class="muted">Console simulasi, bukan terminal Linux sungguhan.</p>
-    <pre id="console-output">Nusantara Hosting Demo
-Belum ada koneksi backend.</pre>
-    <input id="command" placeholder="Contoh: help" maxlength="100">
-    <button class="primary" onclick="sendCommand()">Kirim perintah demo</button>
-  </div>
-</section>
-
-<section id="files" class="page">
-  <div class="card">
-    <h2>File Manager</h2>
-    <p class="muted">Area ini belum terhubung ke penyimpanan server.</p>
-    <p>Folder yang direncanakan: gamemodes, filterscripts, plugins, scriptfiles.</p>
-    <p>Unggah dan ekstrak GM ZIP memerlukan backend yang aman.</p>
-  </div>
-</section>
-
-<section id="settings" class="page">
-  <div class="card">
-    <h2>Settings</h2>
-    <p>Nama panel</p>
-    <input value="Nusantara Hosting" id="panel-name">
-    <button class="primary" onclick="saveName()">Ubah nama tampilan</button>
-    <p id="settings-message" class="muted"></p>
-  </div>
-</section>
-</main>
-</div>
-
-<script>
-const navButtons = document.querySelectorAll("nav button");
-const pages = document.querySelectorAll(".page");
-
-navButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    navButtons.forEach(item => item.classList.remove("active"));
-    pages.forEach(page => page.classList.remove("active"));
-    button.classList.add("active");
-    document.getElementById(button.dataset.page).classList.add("active");
-    document.getElementById("heading").textContent = button.textContent;
-  });
-});
-
-function demo(action) {
-  document.getElementById("server-message").textContent =
-    action + " dipilih. Ini simulasi; server belum dikendalikan.";
-  document.getElementById("console-output").textContent +=
-    "\n[DEMO] Tombol " + action + " ditekan.";
-}
-
-function sendCommand() {
-  const input = document.getElementById("command");
-  const output = document.getElementById("console-output");
-  const command = input.value.trim();
-  if (!command) return;
-  output.textContent += "\n> " + command + "\n[DEMO] Backend belum terhubung.";
-  input.value = "";
-}
-
-function saveName() {
-  const name = document.getElementById("panel-name").value.trim();
-  if (!name) return;
-  document.querySelector(".logo").textContent = name;
-  document.getElementById("settings-message").textContent =
-    "Nama tampilan diubah sementara.";
-}
-</script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
 </body>
 </html>
